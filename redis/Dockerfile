@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ARG redis_version=4.0.12-alpine
+ARG redis_version=4.0.12
 
 FROM redis:${redis_version}
 
-RUN apk add --no-cache bash sed curl ca-certificates \
-    && rm -rf /var/cache/apk/*
-
 # Add kubectl to enable sentinels to change labels during promotion
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+RUN apt update && \
+  apt install -y curl && \
+  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
   chmod +x ./kubectl && \
   mv ./kubectl /usr/local/bin/kubectl
