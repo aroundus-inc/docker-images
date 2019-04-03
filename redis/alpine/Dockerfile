@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ARG redis_version=4.0.12-alpine
+ARG redis_version=4.0.14-alpine
 
 FROM redis:${redis_version}
 
