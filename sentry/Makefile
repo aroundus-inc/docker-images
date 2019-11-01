@@ -1,7 +1,7 @@
 REGISTRY=aroundus
 IMAGE_NAME=sentry
 SENTRY_VERSION=9.1.2
-REVISION=1
+REVISION=2
 VERSION=${SENTRY_VERSION}-${REVISION}
 
 REGISTRY_TAG=${REGISTRY}/${IMAGE_NAME}
@@ -12,7 +12,7 @@ ifdef $$DOCKERFILE
 endif
 
 image:
-	docker build --rm -t ${REGISTRY_TAG}:${VERSION} --build-arg SENTRY_VERSION=${SENTRY_VERSION} -f ${DOCKERFILE} --pull .
+	docker build --rm -t ${REGISTRY_TAG}:${VERSION} --build-arg sentry_version=${SENTRY_VERSION} -f ${DOCKERFILE} --pull .
 	docker tag ${REGISTRY_TAG}:${VERSION} ${REGISTRY_TAG}:latest
 
 push: image
